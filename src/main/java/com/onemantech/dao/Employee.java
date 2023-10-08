@@ -1,13 +1,17 @@
 package com.onemantech.dao;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
 @Data
-@Component
+@AllArgsConstructor
 public class Employee {
 
     String Name;
     int id;
-    int location;
+    String location;
+    int Age;
+
+
 }
