@@ -6,6 +6,5 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class springController {
-    @Autowired
-    Employee employee;
+  @Autowired Employee employee;
 }

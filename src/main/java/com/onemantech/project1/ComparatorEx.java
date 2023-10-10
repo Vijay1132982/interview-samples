@@ -2,10 +2,8 @@ package com.onemantech.project1;
 
 import com.onemantech.dao.Employee;
 import com.onemantech.dao.Employee1;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ComparatorEx {
@@ -44,6 +42,10 @@ public class ComparatorEx {
             new Employee1("Revathi", 1260089, "Delhi", 49, 7890));
     // 50000,7890,5000 nth salary
 
+
+    String vijay = "vijayaragavendran";
+
+    Map<String, Long> sortedlist = Arrays.stream(vijay.split("")).collect(Collectors.groupingBy((Function.identity()),Collectors.counting()));
     int n = 2;
     Optional<Employee1> emp =
         salaryList.stream()
@@ -52,14 +54,54 @@ public class ComparatorEx {
             .skip(1)
             .findFirst();
     System.out.println(emp);
-  }
-}
 
-/*//comparator
-Collections.sort(salaryList);
-    System.out.println("Students sorted by ID (Comparable):");
-    students.forEach(System.out::println);
-Comparator<Student> nameComparator = Comparator.comparing(Student::getName);
-    Collections.sort(students, nameComparator);
-    System.out.println("\nStudents sorted by Name (Comparator):");
-    students.forEach(System.out::println);*/
+
+
+
+    // Hash Map
+
+      HashMap<Integer,String> mp = new HashMap<>();
+      mp.put(1,"vijay");
+      mp.put(2,"Ajay");
+
+      Set<Map.Entry<Integer,String>> entry = mp.entrySet();
+
+      for (Map.Entry ent :entry)
+      {
+      System.out.println(ent.getKey()+" "+ent.getValue());
+    }
+
+      List<Employee> lst = new ArrayList<Employee>();
+
+      lst.add(new Employee ("Vijay",123,"Chennai", 30));
+      lst.add(new Employee ("Revathi",345,"Chennai", 27));
+
+      HashMap<Integer,String> mpp =lst.stream().collect(Collectors.toMap(Employee::getId,Employee::getName,(x,y)->x+","+y,LinkedHashMap::new));
+
+    mpp.forEach((x, y) -> System.out.println(x + "value" + y +"value"));
+
+
+  List <Employee1> employee1List = Arrays.asList(
+          new Employee1 ("Vijay", 12345, "Chennai",30,150000),
+          new Employee1 ("Ajay", 12347, "Chennai",27,80000),
+          new Employee1 ("Revathi", 12348, "Chennai",25,60000),
+          new Employee1 ("Tommy", 12349, "Chennai",3,1500000)
+  );
+
+      Optional<Employee1> empexl =
+              salaryList.stream()
+                      .sorted(Comparator.comparingInt(Employee1::getSalary).reversed())
+                      .distinct()
+                      .skip(1)
+                      .findFirst();
+      System.out.println(empexl);
+     Optional<Employee1> salary= employee1List.stream().sorted(Comparator.comparingInt(Employee1::getSalary).reversed()).skip(1).findFirst();
+
+     if (salary.isPresent())
+     {
+         Employee1 employee1 = salary.get();
+      System.out.println(employee1);
+     }
+    System.out.println(salary+"os employeee");
+ }
+}

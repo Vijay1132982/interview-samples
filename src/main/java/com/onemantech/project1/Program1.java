@@ -9,37 +9,44 @@ public class Program1 {
 
   public static void main(String[] args) {
 
-      // No of occurances of characters
+    // No of occurances of characters
 
-      String test = "onemantechsolutions";
-      Map<String,Long> mp= Arrays.stream(test.split("")).collect(Collectors.groupingBy((Function.identity()),Collectors.counting()));
-      System.out.println(mp);
+    String test = "onemantechsolutions";
+    Map<String, Long> mp =
+        Arrays.stream(test.split(""))
+            .collect(Collectors.groupingBy((Function.identity()), Collectors.counting()));
+    System.out.println(mp);
 
-      // No of occurances of String
+    // No of occurances of String
 
-     List<String> str = Arrays.asList("Vijay","Revathi","Vijay","Ajay","Revathi","Revathi");
-     Map<String,Long> stroc = str.stream().collect(
-             Collectors.groupingBy(
-                     (Function.identity()),Collectors.counting()));
-      System.out.println(stroc);
+    List<String> str = Arrays.asList("Vijay", "Revathi", "Vijay", "Ajay", "Revathi", "Revathi");
+    Map<String, Long> stroc =
+        str.stream().collect(Collectors.groupingBy((Function.identity()), Collectors.counting()));
+    System.out.println(stroc);
 
-      // Find the duplicate characters on string
-      String test2 = "onemantechsolutions";
-      List<String> duplicateElements=Arrays.stream(test2.split("")).collect(
-              Collectors.groupingBy(
-                      (Function.identity()),Collectors.counting()))
-              .entrySet()
-              .stream()
-              .filter(x->x.getValue()>1)
-              .map(Map.Entry::getKey).collect(Collectors.toList());
+    // Find the duplicate characters on string
+    String test2 = "onemantechsolutions";
+    List<String> duplicateElements =
+        Arrays.stream(test2.split(""))
+            .collect(Collectors.groupingBy((Function.identity()), Collectors.counting()))
+            .entrySet()
+            .stream()
+            .filter(x -> x.getValue() > 1)
+            .map(Map.Entry::getKey)
+            .collect(Collectors.toList());
 
-         System.out.println(duplicateElements);
+    String test3 = "vijayaragavendran";
 
-         //List to String convertion
-      List<Employee> list =new ArrayList<Employee>();
-      Map<Integer, Employee> map = list.stream()
-              .collect(Collectors.toMap(Employee::getId, Function.identity()));
+    List<Employee> emplst2 =
+        Arrays.asList(
+            new Employee("VIjay", 12345, "chennai", 24), new Employee("Ajay", 56789, "mumbai", 35));
 
+    Map<Integer, String> emplistgh =
+        emplst2.stream().collect(Collectors.toMap(Employee::getId, Employee::getName));
 
+    for (Map.Entry<Integer, String> obj : emplistgh.entrySet()) {
+      System.out.println(obj.getKey() + "value");
+      System.out.println(obj.getValue() + "Key");
+    }
   }
 }
