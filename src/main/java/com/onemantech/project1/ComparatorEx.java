@@ -103,5 +103,7 @@ public class ComparatorEx {
       System.out.println(employee1);
      }
     System.out.println(salary+"os employeee");
+
+
  }
 }
