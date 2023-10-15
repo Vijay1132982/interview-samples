@@ -1,0 +1,114 @@
+To handle different HTTP status codes for various types of exceptions in a Spring Boot application, you can utilize Spring's exception handling mechanisms. You can create custom exception classes to represent different error scenarios, and then use `@ControllerAdvice` and `@ExceptionHandler` to map these exceptions to the appropriate HTTP status codes. Below is an example of how you can achieve this:
+
+**1. Create Custom Exception Classes:**
+
+Create custom exception classes for different error scenarios. For instance:
+
+```java
+public class FileValidationException extends RuntimeException {
+    public FileValidationException(String message) {
+        super(message);
+    }
+}
+
+public class AuthenticationException extends RuntimeException {
+    public AuthenticationException(String message) {
+        super(message);
+    }
+}
+
+public class AccessForbiddenException extends RuntimeException {
+    public AccessForbiddenException(String message) {
+        super(message);
+    }
+}
+
+public class InternalServerErrorException extends RuntimeException {
+    public InternalServerErrorException(String message) {
+        super(message);
+    }
+}
+
+public class MethodNotAllowedException extends RuntimeException {
+    public MethodNotAllowedException(String message) {
+        super(message);
+    }
+}
+
+public class CertificateIssueException extends RuntimeException {
+    public CertificateIssueException(String message) {
+        super(message);
+    }
+}
+```
+
+**2. Create a ControllerAdvice Class:**
+
+Create a `@ControllerAdvice` class to handle these custom exceptions and map them to the desired HTTP status codes:
+
+```java
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+@ControllerAdvice
+public class ExceptionHandlingControllerAdvice {
+
+    @ExceptionHandler(FileValidationException.class)
+    public ResponseEntity<String> handleFileValidationException(FileValidationException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<String> handleAuthenticationException(AuthenticationException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(AccessForbiddenException.class)
+    public ResponseEntity<String> handleAccessForbiddenException(AccessForbiddenException ex) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(InternalServerErrorException.class)
+    public ResponseEntity<String> handleInternalServerErrorException(InternalServerErrorException ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(MethodNotAllowedException.class)
+    public ResponseEntity<String> handleMethodNotAllowedException(MethodNotAllowedException ex) {
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(CertificateIssueException.class)
+    public ResponseEntity<String> handleCertificateIssueException(CertificateIssueException ex) {
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(ex.getMessage());
+    }
+}
+```
+
+In this class, each `@ExceptionHandler` method corresponds to one of your custom exceptions and specifies the HTTP status code to be returned in the response.
+
+**3. Controller Implementation:**
+
+In your controllers, you can throw these custom exceptions when a particular error condition is encountered. For example:
+
+```java
+@RestController
+public class MyController {
+
+    @GetMapping("/validateFile")
+    public ResponseEntity<String> validateFile() {
+        if (/* file validation fails */) {
+            throw new FileValidationException("File validation failed");
+        }
+        // ... continue processing
+    }
+
+    // Other controller methods
+}
+```
+
+By throwing these custom exceptions, you trigger the corresponding `@ExceptionHandler` methods in your `@ControllerAdvice` class, which then return the appropriate HTTP status codes in the response.
+
+This approach provides a clean and efficient way to handle different exceptions with specific HTTP status codes in a Spring Boot application, enhancing code readability and maintainability.
