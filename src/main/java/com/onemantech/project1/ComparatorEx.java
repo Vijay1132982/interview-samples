@@ -6,6 +6,8 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static org.apache.coyote.http11.Constants.a;
+
 public class ComparatorEx {
 
   public static void main(String[] args) {
@@ -42,8 +44,10 @@ public class ComparatorEx {
             new Employee1("Revathi", 1260089, "Delhi", 49, 7890));
     // 50000,7890,5000 nth salary
 
-
     String vijay = "vijayaragavendran";
+
+    List<String> namelst = Arrays.asList("Vijayaragavendran", "Revathi", "Ramakrishnan","Ajay");
+
 
     Map<String, Long> sortedlist = Arrays.stream(vijay.split("")).collect(Collectors.groupingBy((Function.identity()),Collectors.counting()));
     int n = 2;

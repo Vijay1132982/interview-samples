@@ -1,0 +1,21 @@
+package com.onemantech.project1;
+Map.Entry interface in Java provides certain methods to access the entry in the Map.
+By gaining access to the entry of the Map we can easily manipulate them
+
+        Interface Map.Entry
+        k -> Key
+        V -> Value
+
+        If we need to iterator a map we need to go with Convert it into SET<Map.Entry> entryset
+        Set<Map.Entry> entrySet() – Returns the Set view of the entire map.
+
+        Note : This is not a method of Map.entry interface but it is discussed here because this method is useful while working with Map.Entry interface.
+
+        entrySet()
+
+        The java.util.HashMap.entrySet() method in Java is used to create a set out of the same elements contained in the hash map. It basically returns a set view of the hash map or we can create a new set and store the map elements into them.
+
+Example
+        HashMap <String,Integer> mapp = new HashMap<String,Integer>();
+
+        Set<Map.Entry<String,Integer> name = map.geyEntry();

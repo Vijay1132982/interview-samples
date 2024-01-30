@@ -35,6 +35,24 @@ public class Program1 {
             .map(Map.Entry::getKey)
             .collect(Collectors.toList());
 
+
+
+    HashMap<String,Integer> maplist = new HashMap<String,Integer>();
+    maplist.put("Ajay",1);
+    maplist.put("Revathi",2);
+    maplist.put("Vijay",3);
+maplist.forEach((key,value)-> {
+    System.out.println(maplist);
+});
+    for (Map.Entry<String,Integer> obbhj: maplist.entrySet()) {
+
+      String s = obbhj.getKey();
+      Integer b = obbhj.getValue();
+
+    }
+
+    }
+
     String test3 = "vijayaragavendran";
 
     List<Employee> emplst2 =
@@ -44,9 +62,7 @@ public class Program1 {
     Map<Integer, String> emplistgh =
         emplst2.stream().collect(Collectors.toMap(Employee::getId, Employee::getName));
 
-    for (Map.Entry<Integer, String> obj : emplistgh.entrySet()) {
-      System.out.println(obj.getKey() + "value");
-      System.out.println(obj.getValue() + "Key");
-    }
+
+
   }
-}
+
