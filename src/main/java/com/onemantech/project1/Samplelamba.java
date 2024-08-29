@@ -1,5 +1,6 @@
 package com.onemantech.project1;
 
+import com.onemantech.dao.Employee;
 import groovy.util.MapEntry;
 
 import java.util.*;
@@ -35,6 +36,20 @@ public class Samplelamba {
             .map(Map.Entry::getKey)
             .collect(Collectors.toList());
     System.out.println("non-repetative char/unique elements in string"+m3);
+
+        HashMap<String,Integer> map = new HashMap<>();
+        map.put("Vijay",12345);
+        map.put("Bj",4567);
+        Set<Map.Entry <String,Integer>> setf = map.entrySet();
+        for (Map.Entry<String,Integer> set1 : setf)
+        {
+            String s = set1.getKey();
+            Integer k = set1.getValue();
+            System.out.println("HashKey"+s+ "HashValue"+k);
+
+        }
+
+
 
     // Find the first non repeative element in string
     List<String> m4=  Arrays.stream(s1.split(""))
